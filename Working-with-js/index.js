@@ -1,0 +1,1 @@
+alert("the js is connected")
