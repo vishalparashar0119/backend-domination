@@ -1,0 +1,17 @@
+{
+  "name": "ejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --watch index.js"
+  },
+  "keywords": [],
+  "author": "vishal parashar",
+  "license": "ISC",
+  "description": "this is a practice project of ejs and fs module",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0"
+  }
+}
