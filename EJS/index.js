@@ -21,6 +21,11 @@ app.set('view engine' , 'ejs');
 app.get('/' , (req , res) =>{
       res.render("index");
 });
+// dynamic route 
+app.get('/user/:name' , (req , res)=>{
+      const {name} = req.params;
+      res.send('hello '+name);
+})
 
 // listen server 
 app.listen(port ,()=>{
