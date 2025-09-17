@@ -33,7 +33,7 @@ app.post('/register', async (req, res) => {
       
       const data = await userModel.create(req.body);
       console.log("data created successfully::", data);      
-      res.redirect('/');
+      res.redirect('/read');
 });
 
 app.get('/read',async (req, res) => {
@@ -42,6 +42,12 @@ app.get('/read',async (req, res) => {
 
       res.render("readUsers",{data:data});
 });
+
+app.get('/delete/:id',async (req, res) => {
+    const deletedUser = await userModel.findOneAndDelete({_id: req.params.id})
+    res.redirect('/read');
+});
+
 
 app.listen(port, () => {
       console.log(`server is running at port http://localhost:${port}`);
