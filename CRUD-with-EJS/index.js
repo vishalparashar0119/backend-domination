@@ -25,29 +25,45 @@ connectDb().then(() => {
 app.get('/', (req, res) => {
       res.render("home");
 });
+
+// create user
 app.post('/register', async (req, res) => {
-      
-      if(!req.body.firstName || !req.body.lastName || !req.body.email){
+
+      if (!req.body.firstName || !req.body.lastName || !req.body.email) {
             return res.status(400).send("First Name, Last Name and Email are required fields.");
       }
-      
+
       const data = await userModel.create(req.body);
-      console.log("data created successfully::", data);      
+      console.log("data created successfully::", data);
       res.redirect('/read');
 });
 
-app.get('/read',async (req, res) => {
+// read all users
+app.get('/read', async (req, res) => {
       const data = await userModel.find();
       console.log("data fetched successfully::", data);
 
-      res.render("readUsers",{data:data});
+      res.render("readUsers", { data: data });
 });
 
-app.get('/delete/:id',async (req, res) => {
-    const deletedUser = await userModel.findOneAndDelete({_id: req.params.id})
-    res.redirect('/read');
+// delete user
+app.get('/delete/:id', async (req, res) => {
+      const deletedUser = await userModel.findOneAndDelete({ _id: req.params.id })
+      res.redirect('/read');
 });
 
+// update user
+app.get('/edit/:id', async (req, res) => {
+
+      const data = await userModel.findById(req.params.id);
+      res.render('update', {data:data});
+});
+
+app.post('/update/:id', async (req, res) => {
+      const { firstName, lastName, email, address, pinCode } = req.body;
+      const data = await userModel.findOneAndUpdate({ _id: req.params.id }, {firstName , lastName, email, address, pinCode}, { new: true });
+      res.redirect('/read',);
+});
 
 app.listen(port, () => {
       console.log(`server is running at port http://localhost:${port}`);
