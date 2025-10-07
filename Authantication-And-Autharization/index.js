@@ -1,6 +1,7 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import cookieParser from 'cookie-parser';
+import jwt from 'jsonwebtoken';
 
 const app = express();
 const port = 3000;
@@ -48,7 +49,16 @@ app.get('/newUser' , (req , res)=>{
                    res.send('your password ::'+hash)
               });
       });
-})
+});
+
+app.get('/jwt', (req ,res)=>{
+    
+      const privateKery = 'vishal@123';
+      const token = jwt.sign({email:'itsvishalparashar@gmail.com'} , privateKery );
+      res.cookie('jwt', token);
+      console.log(req.cookies)
+      res.send("done");
+});
 
 app.listen(port , ( )=>{
       console.log(`server is running at port at http://localhost:${port}`);
