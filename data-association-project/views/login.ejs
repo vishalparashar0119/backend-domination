@@ -27,32 +27,13 @@
             <!-- Registration Form -->
             <div class="bg-zinc-800 p-6 rounded-2xl shadow-lg border border-zinc-700">
                   <h1 class="text-2xl font-bold text-green-500 mb-4">User Registration</h1>
-                  <form action="/register" method="post" class="flex flex-col gap-4 text-white">
+                  <form action="/login" method="post" class="flex flex-col gap-4 text-white">
 
-                        <!-- First Name -->
-                        <div>
-                              <label for="userName" class="block text-zinc-300 mb-1">User Name</label>
-                              <input type="text" id="userName" name="userName" placeholder="Enter userName"
-                                    class="w-full px-4 py-2 rounded-lg bg-zinc-700 border border-zinc-600 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-green-500">
-                        </div>
-
-                        <!-- Last Name -->
-                        <div>
-                              <label for="name" class="block text-zinc-300 mb-1">Name</label>
-                              <input type="text" id="name" name="name" placeholder="Enter name"
-                                    class="w-full px-4 py-2 rounded-lg bg-zinc-700 border border-zinc-600 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-green-500">
-                        </div>
 
                         <!-- Email -->
                         <div>
                               <label for="email" class="block text-zinc-300 mb-1">Email</label>
                               <input type="email" id="email" name="email" placeholder="Enter your email"
-                                    class="w-full px-4 py-2 rounded-lg bg-zinc-700 border border-zinc-600 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-green-500">
-                        </div>
-                        <!-- age -->
-                        <div>
-                              <label for="age" class="block text-zinc-300 mb-1">Age</label>
-                              <input type="number" id="age" name="age" placeholder="Enter age"
                                     class="w-full px-4 py-2 rounded-lg bg-zinc-700 border border-zinc-600 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-green-500">
                         </div>
 
@@ -67,14 +48,10 @@
                         <!-- Submit -->
                         <button type="submit"
                               class="bg-green-600 hover:bg-green-500 transition-colors w-full py-2 rounded-lg cursor-pointer font-bold shadow-md">
-                              Register
+                              Login
                         </button>
 
-                        <!-- All Users Button -->
-                        <a href="/login"
-                              class="bg-green-600 hover:bg-green-500 transition-colors w-full py-2 rounded-lg text-center font-bold shadow-md">
-                             Have an Account?
-                        </a>
+
                   </form>
             </div>
 

@@ -5,7 +5,11 @@ const userSchema = new mongoose.Schema({
       name : String,
       age : Number,
       email : String,
-      password : String
+      password : String,
+      post : [{
+            type:mongoose.Schema.Types.ObjectId,
+            ref : 'post'
+      }]
 });
 
 
