@@ -29,9 +29,24 @@ app.get('/', (req, res) => {
       res.render("home");
 });
 
-app.get('/allPost', (req, res) => {
-      res.send("this is all post page");
+app.get('/allPost', isLoggedIn , (req, res) => {
+      const posts = PostModel.find();
+      console.log(" all posts are ::",posts);
+      res.render("allPost");
 });
+
+app.post('/addPost' ,  async ( req , res)=>{
+      const { content} = req.body;
+      const postData = await PostModel.create({ content : content})
+      return res.status(200).redirect('/allPost');
+})
+
+
+app.get('/profile' ,isLoggedIn , async ( req , res ) =>{
+      const user = await UserModel.findOne({email : req.user.email});
+      res.render("profile" , {user});
+})
+
 app.post('/register', async (req, res) => {
       const { name, userName, email, password, age } = req.body;
       const user = await UserModel.findOne({ email });
@@ -51,7 +66,7 @@ app.post('/register', async (req, res) => {
                   });
 
                   const token = jwt.sign({ email: email, userId: user._id }, 'vishal@123#');
-                  res.cookie('value', token);
+                  res.cookie('token', token);
                   res.status(200).send('user registered successfully');
             })
       })
@@ -75,16 +90,24 @@ app.post('/login', async (req, res) => {
       bcrypt.compare(password, user.password, (err, result) => {
             if (!result) return res.status(500).send('somthing went wrong');
             const token = jwt.sign({ email: email, userId: user._id }, 'vishal@123#');
-            res.cookie('value', token);
+            res.cookie('token', token);
             res.status(200).redirect('/allPost');
-      })
-
-
-
-
-
-
+      });
 });
+
+app.get('/logout', ( req , res)=>{
+      res.cookie('token', "");
+      res.redirect('/login');
+})
 app.listen(port, () => {
       console.log(`server is running on port http://localhost:${port}`);
 })
+
+
+function isLoggedIn(req , res , next){
+   if(req.cookies.token ===  "") return res.send("please login to access this page");
+    
+   const data =  jwt.verify(req.cookies.token , 'vishal@123#')
+   req.user = data;
+   next();
+}

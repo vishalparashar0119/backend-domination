@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Posts</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style>
+    input:-webkit-autofill,
+    textarea:-webkit-autofill {
+      box-shadow: 0 0 0px 1000px #3f3f46 inset !important;
+      -webkit-text-fill-color: #fff !important;
+      caret-color: #fff !important;
+      transition: background-color 9999s ease-in-out 0s;
+    }
+
+    body {
+      padding-bottom: 120px;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-zinc-900 text-white flex flex-col">
+
+  <!-- Top Navbar -->
+  <nav
+    class="fixed top-0 left-0 right-0 bg-zinc-800 border-b border-zinc-700 shadow-md flex justify-between items-center px-6 py-3 z-10">
+    <h1 class="text-green-500 font-bold text-xl">All Posts</h1>
+    <a href="/profile"
+      class="bg-green-600 hover:bg-green-500 text-white font-medium px-4 py-1 rounded-lg shadow-md text-sm transition-colors">
+      Profile
+    </a>
+  </nav>
+
+  <!-- Posts Section -->
+  <main class="flex-1 overflow-y-auto mt-16 mb-24 px-4 space-y-4">
+    <!-- Example Post -->
+    <div class="bg-zinc-800 border border-zinc-700 rounded-xl p-4 shadow-md">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="text-green-500 font-semibold">John Doe</h3>
+        <span class="text-xs text-zinc-400">12 Nov 2025, 8:30 PM</span>
+      </div>
+      <p class="text-zinc-200">This is an example post content. It will display the user’s thoughts or updates here.</p>
+    </div>
+
+    <div class="bg-zinc-800 border border-zinc-700 rounded-xl p-4 shadow-md">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="text-green-500 font-semibold">Jane Smith</h3>
+        <span class="text-xs text-zinc-400">12 Nov 2025, 9:10 PM</span>
+      </div>
+      <p class="text-zinc-200">Another sample post to show multiple posts in the feed area.</p>
+    </div>
+  </main>
+
+  <!-- Centered Bottom Form -->
+  <form action="/addPost" method="post"
+    class="fixed bottom-4 left-1/2 -translate-x-1/2 bg-zinc-800 border border-zinc-700 rounded-full shadow-lg flex items-center gap-2 px-4 py-2 w-[90%] sm:w-[70%] md:w-[50%] lg:w-[40%]">
+    <input type="text" name="content" placeholder="Write a post..."
+      class="flex-1 px-3 py-2 bg-transparent text-white placeholder-zinc-400 focus:outline-none text-sm" required>
+    <button type="submit"
+      class="bg-green-600 hover:bg-green-500 transition-colors px-4 py-1 rounded-full font-semibold text-sm shadow-md">Post</button>
+  </form>
+
+</body>
+
+</html>

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema({
-      postValue : String,
+      content : String,
       user : {
             type : mongoose.Schema.Types.ObjectId,
             ref : 'user'
