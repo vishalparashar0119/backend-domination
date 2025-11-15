@@ -37,21 +37,31 @@
   <!-- Posts Section -->
   <main class="flex-1 overflow-y-auto mt-16 mb-24 px-4 space-y-4">
     <!-- Example Post -->
-    <div class="bg-zinc-800 border border-zinc-700 rounded-xl p-4 shadow-md">
-      <div class="flex items-center justify-between mb-2">
-        <h3 class="text-green-500 font-semibold">John Doe</h3>
-        <span class="text-xs text-zinc-400">12 Nov 2025, 8:30 PM</span>
-      </div>
-      <p class="text-zinc-200">This is an example post content. It will display the user’s thoughts or updates here.</p>
-    </div>
 
-    <div class="bg-zinc-800 border border-zinc-700 rounded-xl p-4 shadow-md">
-      <div class="flex items-center justify-between mb-2">
-        <h3 class="text-green-500 font-semibold">Jane Smith</h3>
-        <span class="text-xs text-zinc-400">12 Nov 2025, 9:10 PM</span>
+    <% posts.forEach(function(post){%>
+      <div class="bg-zinc-800 border border-zinc-700 rounded-xl p-4 shadow-md">
+
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-2">
+          <h3 class="text-green-500 font-semibold">John Doe</h3>
+          <span class="text-xs text-zinc-400">date </span>
+        </div>
+
+        <!-- Content -->
+        <p class="text-zinc-200 mb-4">
+          <%= post.content %>
+        </p>
+
+        <!-- Like Button -->
+        <a href="/likePost/"
+          class="flex items-center gap-1 text-zinc-300 hover:text-green-500 text-sm font-medium transition-colors">
+          <span class="text-lg">Like</span>
+          <span><%= post.likes.length %></span> <!-- like count -->
+        </a>
+
       </div>
-      <p class="text-zinc-200">Another sample post to show multiple posts in the feed area.</p>
-    </div>
+      <% }) %>
+
   </main>
 
   <!-- Centered Bottom Form -->

@@ -29,21 +29,24 @@ app.get('/', (req, res) => {
       res.render("home");
 });
 
-app.get('/allPost', isLoggedIn , (req, res) => {
-      const posts = PostModel.find();
-      console.log(" all posts are ::",posts);
-      res.render("allPost");
+app.get('/allPost', isLoggedIn , async (req, res) => {
+
+      const posts = await PostModel.find().populate('user');
+      res.render("allPost" , { posts});
 });
 
-app.post('/addPost' ,  async ( req , res)=>{
+app.post('/addPost' ,isLoggedIn ,  async ( req , res)=>{
       const { content} = req.body;
-      const postData = await PostModel.create({ content : content})
+      const user = await UserModel.findOne({email : req.user.email});
+      const postData = await PostModel.create({ content : content , user: user._id})
+      user.post.push(postData._id);
+      await user.save();
       return res.status(200).redirect('/allPost');
 })
 
 
 app.get('/profile' ,isLoggedIn , async ( req , res ) =>{
-      const user = await UserModel.findOne({email : req.user.email});
+      const user = await UserModel.findOne({email : req.user.email}).populate('post');
       res.render("profile" , {user});
 })
 
@@ -67,7 +70,7 @@ app.post('/register', async (req, res) => {
 
                   const token = jwt.sign({ email: email, userId: user._id }, 'vishal@123#');
                   res.cookie('token', token);
-                  res.status(200).send('user registered successfully');
+                  res.status(200).redirect('/allPost');
             })
       })
 

@@ -2,9 +2,11 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>User Profile</title>
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
   <style>
@@ -19,48 +21,106 @@
 </head>
 
 <body class="min-h-screen bg-zinc-900 flex items-center justify-center p-6 text-white">
-  <div class="w-full max-w-2xl bg-zinc-800 p-8 rounded-2xl shadow-lg border border-zinc-700">
-    <!-- Profile Header -->
-    <div class="flex flex-col items-center text-center mb-8">
-      <div
-        class="w-24 h-24 rounded-full bg-green-600 flex items-center justify-center text-4xl font-bold text-white mb-4 shadow-md">
-        <%= user.name.charAt(0) %>
-      </div>
-      <h2 class="text-2xl font-semibold text-green-500">User Profile</h2>
-    </div>
 
-    <!-- Profile Details -->
-    <div class="space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-zinc-700 pb-3">
-        <span class="text-zinc-400">Full Name</span>
-        <span class="font-medium text-white"><%= user.name %></span>
-      </div>
-      
-      <div class="space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-zinc-700 pb-3">
-          <span class="text-zinc-400">User Name</span>
-          <span class="font-medium text-white"><%= user.userName %></span>
+  <!-- GRID CONTAINER (Profile + Posts Side by Side) -->
+  <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8">
+
+    <!-- PROFILE CARD -->
+    <div class="bg-zinc-800 p-8 rounded-2xl shadow-lg border border-zinc-700">
+
+      <!-- Profile Header -->
+      <div class="flex items-center gap-4 mb-8">
+        <div
+          class="w-20 h-20 rounded-full bg-green-600 flex items-center justify-center text-3xl font-bold text-white shadow-md">
+          <%= user.name.charAt(0) %>
         </div>
 
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-zinc-700 pb-3">
-        <span class="text-zinc-400">Email</span>
-        <span class="font-medium text-white"><%= user.email %></span>
+        <div>
+          <h2 class="text-2xl font-semibold text-green-500">
+            <%= user.name %>
+          </h2>
+          <p class="text-zinc-400">User Profile</p>
+        </div>
       </div>
 
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-zinc-700 pb-3">
-        <span class="text-zinc-400">Age</span>
-        <span class="font-medium text-white"><%= user.age %></span>
+      <!-- User Details -->
+      <div class="space-y-4">
+        <div class="flex justify-between border-b border-zinc-700 pb-3">
+          <span class="text-zinc-400">Full Name</span>
+          <span class="font-medium text-white">
+            <%= user.name %>
+          </span>
+        </div>
+
+        <div class="flex justify-between border-b border-zinc-700 pb-3">
+          <span class="text-zinc-400">User Name</span>
+          <span class="font-medium text-white">
+            <%= user.userName %>
+          </span>
+        </div>
+
+        <div class="flex justify-between border-b border-zinc-700 pb-3">
+          <span class="text-zinc-400">Email</span>
+          <span class="font-medium text-white">
+            <%= user.email %>
+          </span>
+        </div>
+
+        <div class="flex justify-between border-b border-zinc-700 pb-3">
+          <span class="text-zinc-400">Age</span>
+          <span class="font-medium text-white">
+            <%= user.age %>
+          </span>
+        </div>
       </div>
+
+      <!-- Buttons -->
+      <div class="mt-8 flex gap-4">
+        <a href="/allPost"
+          class="bg-green-600 hover:bg-green-500 transition-colors px-6 py-2 rounded-lg font-semibold shadow-md">Posts</a>
+
+        <a href="/logout"
+          class="bg-red-600 hover:bg-red-500 transition-colors px-6 py-2 rounded-lg font-semibold shadow-md">Logout</a>
+      </div>
+
     </div>
 
-    <!-- Edit Button -->
-    <div class="mt-8 text-center">
-      <a href="/allPost"
-        class="bg-green-600 hover:bg-green-500 transition-colors px-6 py-2 rounded-lg font-semibold shadow-md">Posts</a>
-      <a href="/logout"
-        class="bg-red-600 hover:bg-red-500 transition-colors px-6 py-2 rounded-lg font-semibold shadow-md">Logout</a>
+
+    <!-- POSTS CARD -->
+    <div class="bg-zinc-800 p-8 rounded-2xl shadow-lg border border-zinc-700">
+
+      <!-- Posts Header -->
+      <div class="mb-4">
+        <h2 class="text-2xl font-semibold text-green-500">Your Posts</h2>
+        <p class="text-zinc-400 text-sm">Manage your activity</p>
+      </div>
+
+      <!-- SCROLLABLE POST LIST -->
+      <div class="space-y-4 max-h-96 overflow-y-auto pr-2">
+        <% user.post.forEach(function (posts){ %>
+          <div class="bg-zinc-900 border border-zinc-700 rounded-xl p-4 shadow-md">
+            <p class="text-zinc-200 mb-4">
+              <%= posts.content %>
+            </p>
+
+            <a href="/deletePost/"
+              class="bg-red-600 hover:bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-md shadow-md transition-colors inline-block">
+              Delete
+            </a>
+          </div>
+          <%})%>
+            <!-- Example Post -->
+
+
+            <!-- More posts will appear here -->
+
+      </div>
+
     </div>
+
+
   </div>
+
 </body>
 
 </html>
