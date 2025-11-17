@@ -43,8 +43,8 @@
 
         <!-- Header -->
         <div class="flex items-center justify-between mb-2">
-          <h3 class="text-green-500 font-semibold">John Doe</h3>
-          <span class="text-xs text-zinc-400">date </span>
+          <h3 class="text-green-500 font-semibold"><%= post.user.name%></h3>
+          <span class="text-xs text-zinc-400"><%= post.date.toString().split('GMT')[0]%> </span>
         </div>
 
         <!-- Content -->
@@ -53,7 +53,7 @@
         </p>
 
         <!-- Like Button -->
-        <a href="/likePost/"
+        <a href="/likePost/<%=post._id%>"
           class="flex items-center gap-1 text-zinc-300 hover:text-green-500 text-sm font-medium transition-colors">
           <span class="text-lg">Like</span>
           <span><%= post.likes.length %></span> <!-- like count -->

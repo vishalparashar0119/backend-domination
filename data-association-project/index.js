@@ -101,7 +101,22 @@ app.post('/login', async (req, res) => {
 app.get('/logout', ( req , res)=>{
       res.cookie('token', "");
       res.redirect('/login');
+});
+
+// route for liking post
+
+app.get('/likePost/:postId' , isLoggedIn , async ( req , res)=>{
+
+      const {postId} = req.params;
+      const user = await UserModel.findOne({ email: req.user.email});
+      const post = await PostModel.findById(postId);
+      if(post.likes.includes(user._id)) return res.redirect('/allPost');
+      post.likes.push(user._id);
+      await post.save();
+      return res.redirect('/allPost');
+      
 })
+
 app.listen(port, () => {
       console.log(`server is running on port http://localhost:${port}`);
 })
